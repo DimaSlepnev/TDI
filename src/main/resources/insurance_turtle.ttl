@@ -1,0 +1,609 @@
+@prefix : <http://www.w3.org/2002/07/insurance#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+<http://www.example.org/insurance> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.example.org/insurance#вибираєПеріодичність
+:вибираєПеріодичність rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdf:type owl:FunctionalProperty ,
+                               owl:AsymmetricProperty ;
+                      rdfs:domain :СПОЖИВАЧ ;
+                      rdfs:range :ПЕРІОДИЧНІСТЬ_ВИПЛАТ .
+
+
+###  http://www.example.org/insurance#вибираєСтрахування
+:вибираєСтрахування rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdf:type owl:AsymmetricProperty ;
+                    rdfs:domain :СПОЖИВАЧ ;
+                    rdfs:range :ВИД_СТРАХУВАННЯ .
+
+
+###  http://www.example.org/insurance#виплачує
+:виплачує rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ,
+                   owl:AsymmetricProperty ;
+          rdfs:domain :СТРАХУВАЛЬНИК ;
+          rdfs:range :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#маєВідношення
+:маєВідношення rdf:type owl:ObjectProperty ;
+               rdfs:domain :СТРАХОВИЙ_ВИПАДОК ;
+               rdfs:range :ДОГОВІР .
+
+
+###  http://www.example.org/insurance#надаєІнформацію
+:надаєІнформацію rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ,
+                          owl:InverseFunctionalProperty ,
+                          owl:AsymmetricProperty ;
+                 rdfs:domain :СТРАХУВАЛЬНИК ;
+                 rdfs:range :СПОЖИВАЧ .
+
+
+###  http://www.example.org/insurance#надаєПослугу
+:надаєПослугу rdf:type owl:ObjectProperty ;
+              rdfs:domain :СТРАХУВАЛЬНИК ;
+              rdfs:range :СТРАХОВА_ПОСЛУГА .
+
+
+###  http://www.example.org/insurance#оплачує
+:оплачує rdf:type owl:ObjectProperty ,
+                  owl:FunctionalProperty ,
+                  owl:AsymmetricProperty ;
+         rdfs:domain :СПОЖИВАЧ ;
+         rdfs:range :СТРАХОВА_ПОСЛУГА .
+
+
+###  http://www.example.org/insurance#послугаМаєВідношення
+:послугаМаєВідношення rdf:type owl:ObjectProperty ;
+                      rdfs:domain :СТРАХОВА_ПОСЛУГА ;
+                      rdfs:range :ДОГОВІР .
+
+
+###  http://www.example.org/insurance#реєструє
+:реєструє rdf:type owl:ObjectProperty ,
+                   owl:AsymmetricProperty ;
+          rdfs:domain :СТРАХУВАЛЬНИК ;
+          rdfs:range :ДОГОВІР .
+
+
+###  http://www.example.org/insurance#страховийВипадок
+:страховийВипадок rdf:type owl:ObjectProperty ;
+                  rdfs:domain :ДОГОВІР ;
+                  rdfs:range :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#укладає
+:укладає rdf:type owl:ObjectProperty ,
+                  owl:AsymmetricProperty ;
+         rdfs:domain :СТРАХУВАЛЬНИК ;
+         rdfs:range :ДОГОВІР .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.example.org/insurance#відмоваУВиплаті
+:відмоваУВиплаті rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :СТРАХОВИЙ_ВИПАДОК ;
+                 rdfs:range xsd:string .
+
+
+###  http://www.example.org/insurance#кінецьДії
+:кінецьДії rdf:type owl:DatatypeProperty ;
+           rdfs:domain :ДОГОВІР ;
+           rdfs:range xsd:dateTime .
+
+
+###  http://www.example.org/insurance#назваПослуги
+:назваПослуги rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :ДОГОВІР ;
+              rdfs:range xsd:string .
+
+
+###  http://www.example.org/insurance#отримуєКомпенсацію
+:отримуєКомпенсацію rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :СТРАХОВИЙ_ВИПАДОК ;
+                    rdfs:range xsd:double .
+
+
+###  http://www.example.org/insurance#періодичніПлатежі
+:періодичніПлатежі rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :ДОГОВІР ;
+                   rdfs:range xsd:double .
+
+
+###  http://www.example.org/insurance#порушенняУмови
+:порушенняУмови rdf:type owl:DatatypeProperty ;
+                rdfs:domain :ДОГОВІР ;
+                rdfs:range xsd:boolean .
+
+
+###  http://www.example.org/insurance#початокДії
+:початокДії rdf:type owl:DatatypeProperty ;
+            rdfs:domain :ДОГОВІР ;
+            rdfs:range xsd:dateTime .
+
+
+###  http://www.example.org/insurance#сумаКомпенсації
+:сумаКомпенсації rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :ДОГОВІР ;
+                 rdfs:range xsd:double .
+
+
+###  http://www.example.org/insurance#умовиПрипиненняДії
+:умовиПрипиненняДії rdf:type owl:DatatypeProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain :ДОГОВІР ;
+                    rdfs:range xsd:string .
+
+
+###  http://www.example.org/insurance#форсМажор
+:форсМажор rdf:type owl:DatatypeProperty ;
+           rdfs:domain :ДОГОВІР ;
+           rdfs:range xsd:string .
+
+
+###  http://www.example.org/insurance#ціна
+:ціна rdf:type owl:DatatypeProperty ,
+               owl:FunctionalProperty ;
+      rdfs:domain :ДОГОВІР ;
+      rdfs:range xsd:double .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.example.org/insurance#ІНВАЛІДНІСТЬ
+:ІНВАЛІДНІСТЬ rdf:type owl:Class ;
+              rdfs:subClassOf :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#АВТОСТРАХУВАННЯ
+:АВТОСТРАХУВАННЯ rdf:type owl:Class ;
+                 rdfs:subClassOf :ВИД_СТРАХУВАННЯ .
+
+
+###  http://www.example.org/insurance#ВИБУХ
+:ВИБУХ rdf:type owl:Class ;
+       rdfs:subClassOf :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#ВИД_СТРАХУВАННЯ
+:ВИД_СТРАХУВАННЯ rdf:type owl:Class .
+
+
+###  http://www.example.org/insurance#ДОГОВІР
+:ДОГОВІР rdf:type owl:Class .
+
+
+###  http://www.example.org/insurance#КРАДІЖКА
+:КРАДІЖКА rdf:type owl:Class ;
+          rdfs:subClassOf :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#НЕЩАСНИЙ_ВИПАДОК
+:НЕЩАСНИЙ_ВИПАДОК rdf:type owl:Class ;
+                  rdfs:subClassOf :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#ПЕРІОДИЧНІСТЬ_ВИПЛАТ
+:ПЕРІОДИЧНІСТЬ_ВИПЛАТ rdf:type owl:Class .
+
+
+###  http://www.example.org/insurance#ПОЖЕЖА
+:ПОЖЕЖА rdf:type owl:Class ;
+        rdfs:subClassOf :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#РАЗ_НА_КВАРТАЛ
+:РАЗ_НА_КВАРТАЛ rdf:type owl:Class ;
+                rdfs:subClassOf :ПЕРІОДИЧНІСТЬ_ВИПЛАТ .
+
+
+###  http://www.example.org/insurance#РАЗ_НА_МІСЯЦЬ
+:РАЗ_НА_МІСЯЦЬ rdf:type owl:Class ;
+               rdfs:subClassOf :ПЕРІОДИЧНІСТЬ_ВИПЛАТ .
+
+
+###  http://www.example.org/insurance#РАЗ_НА_РІК
+:РАЗ_НА_РІК rdf:type owl:Class ;
+            rdfs:subClassOf :ПЕРІОДИЧНІСТЬ_ВИПЛАТ .
+
+
+###  http://www.example.org/insurance#СМЕРТЬ
+:СМЕРТЬ rdf:type owl:Class ;
+        rdfs:subClassOf :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#СПОЖИВАЧ
+:СПОЖИВАЧ rdf:type owl:Class .
+
+
+###  http://www.example.org/insurance#СТИХІЙНЕ_ЛИХО
+:СТИХІЙНЕ_ЛИХО rdf:type owl:Class ;
+               rdfs:subClassOf :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#СТРАХОВА_ПОСЛУГА
+:СТРАХОВА_ПОСЛУГА rdf:type owl:Class .
+
+
+###  http://www.example.org/insurance#СТРАХОВИЙ_ВИПАДОК
+:СТРАХОВИЙ_ВИПАДОК rdf:type owl:Class .
+
+
+###  http://www.example.org/insurance#СТРАХУВАЛЬНИК
+:СТРАХУВАЛЬНИК rdf:type owl:Class ;
+               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                 owl:onProperty :надаєІнформацію ;
+                                 owl:someValuesFrom :СПОЖИВАЧ
+                               ] .
+
+
+###  http://www.example.org/insurance#СТРАХУВАННЯ_ІНШЕ
+:СТРАХУВАННЯ_ІНШЕ rdf:type owl:Class ;
+                  rdfs:subClassOf :ВИД_СТРАХУВАННЯ .
+
+
+###  http://www.example.org/insurance#СТРАХУВАННЯ_НЕРУХОМОСТІ
+:СТРАХУВАННЯ_НЕРУХОМОСТІ rdf:type owl:Class ;
+                         rdfs:subClassOf :ВИД_СТРАХУВАННЯ .
+
+
+###  http://www.example.org/insurance#ФІЗИЧНА_ОСОБА
+:ФІЗИЧНА_ОСОБА rdf:type owl:Class ;
+               rdfs:subClassOf :СПОЖИВАЧ ;
+               owl:disjointWith :ЮРИДИЧНА_ОСОБА .
+
+
+###  http://www.example.org/insurance#ХВОРОБА
+:ХВОРОБА rdf:type owl:Class ;
+         rdfs:subClassOf :СТРАХОВИЙ_ВИПАДОК .
+
+
+###  http://www.example.org/insurance#ЮРИДИЧНА_ОСОБА
+:ЮРИДИЧНА_ОСОБА rdf:type owl:Class ;
+                rdfs:subClassOf :СПОЖИВАЧ .
+
+
+###  http://www.example.org/insurance#СТРАХУВАННЯ_ЗДОРОВ'Я
+<http://www.example.org/insurance#СТРАХУВАННЯ_ЗДОРОВ'Я> rdf:type owl:Class ;
+                                                        rdfs:subClassOf :ВИД_СТРАХУВАННЯ .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.example.org/insurance#TOV_pershi
+:TOV_pershi rdf:type owl:NamedIndividual ,
+                     :ЮРИДИЧНА_ОСОБА ;
+            :вибираєПеріодичність :raz_na_misiatc ;
+            :вибираєСтрахування :spokiina_budiviya ;
+            :оплачує :strahuvanie_neruhomist .
+
+
+###  http://www.example.org/insurance#avto_civilne
+:avto_civilne rdf:type owl:NamedIndividual ,
+                       :АВТОСТРАХУВАННЯ .
+
+
+###  http://www.example.org/insurance#dogovir_001
+:dogovir_001 rdf:type owl:NamedIndividual ,
+                      :ДОГОВІР ;
+             :страховийВипадок :dtp_kviten_2024 ;
+             :кінецьДії "2028-01-01T07:00:00"^^xsd:dateTime ;
+             :назваПослуги "ДОГОВІР_001" ;
+             :періодичніПлатежі "500.0"^^xsd:double ;
+             :порушенняУмови "false"^^xsd:boolean ;
+             :початокДії "2025-01-01T07:00:00"^^xsd:dateTime ;
+             :сумаКомпенсації "2000.0"^^xsd:double ;
+             :умовиПрипиненняДії "Смерть" ;
+             :форсМажор "Виїзд за кордон" ;
+             :ціна "10000.0"^^xsd:double .
+
+
+###  http://www.example.org/insurance#dogovir_002
+:dogovir_002 rdf:type owl:NamedIndividual ,
+                      :ДОГОВІР ;
+             :страховийВипадок :pozhezha_veresen_2023 ;
+             :кінецьДії "2025-12-01T07:00:00"^^xsd:dateTime ;
+             :назваПослуги "ДОГОВІР_002" ;
+             :періодичніПлатежі "2000.0"^^xsd:double ;
+             :порушенняУмови "true"^^xsd:boolean ;
+             :початокДії "2022-12-01T07:00:00"^^xsd:dateTime ;
+             :сумаКомпенсації "100000.0"^^xsd:double ;
+             :умовиПрипиненняДії "Висновок комісії" ;
+             :форсМажор "Розформування ТОВ" ;
+             :ціна "72000.0"^^xsd:double .
+
+
+###  http://www.example.org/insurance#dtp_kviten_2024
+:dtp_kviten_2024 rdf:type owl:NamedIndividual ,
+                          :НЕЩАСНИЙ_ВИПАДОК ;
+                 :маєВідношення :dogovir_001 .
+
+
+###  http://www.example.org/insurance#ivan_petrenko
+:ivan_petrenko rdf:type owl:NamedIndividual ,
+                        :ФІЗИЧНА_ОСОБА ;
+               :вибираєПеріодичність :raz_na_rik ;
+               :вибираєСтрахування :avto_civilne ;
+               :оплачує :polis_avto_civilka .
+
+
+###  http://www.example.org/insurance#polis_avto_civilka
+:polis_avto_civilka rdf:type owl:NamedIndividual ,
+                             :СТРАХОВА_ПОСЛУГА ;
+                    :послугаМаєВідношення :dogovir_001 .
+
+
+###  http://www.example.org/insurance#pozhezha_veresen_2023
+:pozhezha_veresen_2023 rdf:type owl:NamedIndividual ,
+                                :ПОЖЕЖА ;
+                       :маєВідношення :dogovir_002 .
+
+
+###  http://www.example.org/insurance#raz_na_misiatc
+:raz_na_misiatc rdf:type owl:NamedIndividual ,
+                         :РАЗ_НА_МІСЯЦЬ .
+
+
+###  http://www.example.org/insurance#raz_na_rik
+:raz_na_rik rdf:type owl:NamedIndividual ,
+                     :РАЗ_НА_РІК .
+
+
+###  http://www.example.org/insurance#spokiina_budiviya
+:spokiina_budiviya rdf:type owl:NamedIndividual ,
+                            :СТРАХУВАННЯ_НЕРУХОМОСТІ .
+
+
+###  http://www.example.org/insurance#strahova_kompaniya_1
+:strahova_kompaniya_1 rdf:type owl:NamedIndividual ,
+                               :СТРАХУВАЛЬНИК ;
+                      :виплачує :dtp_kviten_2024 ;
+                      :надаєІнформацію :ivan_petrenko ;
+                      :реєструє :dogovir_001 ;
+                      :укладає :dogovir_001 .
+
+
+###  http://www.example.org/insurance#strahova_kompaniya_2
+:strahova_kompaniya_2 rdf:type owl:NamedIndividual ,
+                               :СТРАХУВАЛЬНИК ;
+                      :виплачує :pozhezha_veresen_2023 ;
+                      :надаєІнформацію :TOV_pershi ;
+                      :реєструє :dogovir_002 ;
+                      :укладає :dogovir_002 .
+
+
+###  http://www.example.org/insurance#strahuvanie_neruhomist
+:strahuvanie_neruhomist rdf:type owl:NamedIndividual ,
+                                 :СТРАХОВА_ПОСЛУГА ;
+                        :послугаМаєВідношення :dogovir_002 .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ІНВАЛІДНІСТЬ
+                :ВИБУХ
+                :КРАДІЖКА
+                :НЕЩАСНИЙ_ВИПАДОК
+                :ПОЖЕЖА
+                :СМЕРТЬ
+                :СТИХІЙНЕ_ЛИХО
+                :ХВОРОБА
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :АВТОСТРАХУВАННЯ
+                :СТРАХУВАННЯ_ІНШЕ
+                :СТРАХУВАННЯ_НЕРУХОМОСТІ
+                <http://www.example.org/insurance#СТРАХУВАННЯ_ЗДОРОВ'Я>
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :РАЗ_НА_КВАРТАЛ
+                :РАЗ_НА_МІСЯЦЬ
+                :РАЗ_НА_РІК
+              )
+] .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+owl:x rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+owl:вид rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+owl:послуга rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+owl:договір rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+owl:компанія rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+owl:випадок rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+owl:сума rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "ОТРИМУЄ_ВИПЛАТУ_ПРАВИЛО" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :СПОЖИВАЧ ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> owl:x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :вибираєСтрахування ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> owl:x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> owl:вид
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :оплачує ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> owl:x ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> owl:послуга
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :послугаМаєВідношення ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> owl:послуга ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> owl:договір
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :укладає ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> owl:компанія ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> owl:договір
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :виплачує ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> owl:компанія ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> owl:випадок
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :маєВідношення ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> owl:випадок ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> owl:договір
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :сумаКомпенсації ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> owl:договір ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> owl:сума
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#propertyPredicate> :порушенняУмови ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> owl:договір ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> "false"^^xsd:boolean
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest rdf:nil
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :отримуєКомпенсацію ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> owl:випадок ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> owl:сума
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "ВІДМОВА_ВИПЛАТИ_ПРАВИЛО" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :СПОЖИВАЧ ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> owl:x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :вибираєСтрахування ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> owl:x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> owl:вид
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :оплачує ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> owl:x ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> owl:послуга
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :послугаМаєВідношення ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> owl:послуга ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> owl:договір
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :укладає ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> owl:компанія ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> owl:договір
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :виплачує ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> owl:компанія ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> owl:випадок
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :маєВідношення ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> owl:випадок ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> owl:договір
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> :порушенняУмови ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> owl:договір ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest rdf:nil
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :відмоваУВиплаті ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> owl:випадок ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "Порушення умов договору"
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
